@@ -17,7 +17,7 @@ def test_fill_out_the_form():
     registration_page.fill_phone_number('1231231231')
     registration_page.fill_date_of_birth('1988', 'September', '20')
     registration_page.select_subject('English')
-    registration_page.select_hobbie('Reading')
+    registration_page.select_hobby('Reading')
     registration_page.upload_picture('1570735001190494352.jpg')
     registration_page.fill_current_address('Poland, Gdańsk, Wilcza 1')
     registration_page.select_state('Haryana')
@@ -27,7 +27,7 @@ def test_fill_out_the_form():
     registration_page.submit_form()
 
     # form should have registered user
-    registration_page.modal_after_submition().should(have.texts(
+    registration_page.should_have_user_info(
         'Nadzeya Rakach',
         'random.email@gmail.com',
         'Female',
@@ -38,4 +38,4 @@ def test_fill_out_the_form():
         '1570735001190494352.jpg',
         'Poland, Gdańsk, Wilcza 1',
         'Haryana Karnal'
-    ))
+    )

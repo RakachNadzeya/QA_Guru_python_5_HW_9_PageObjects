@@ -4,9 +4,6 @@ from selene import browser, have, command
 
 
 class StudentRegistrationPage:
-    def upload_picture(self, path):
-        file_path = os.path.join(os.getcwd(), 'resources', path)
-        browser.element('#uploadPicture').send_keys(file_path)
 
     def open(self):
         browser.open('/automation-practice-form')
@@ -38,8 +35,12 @@ class StudentRegistrationPage:
     def select_subject(self, value):
         browser.element('#subjectsInput').click().send_keys(value).press_enter()
 
-    def select_hobbie(self, value):
+    def select_hobby(self, value):
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
+        
+    def upload_picture(self, path):
+        file_path = os.path.join(os.getcwd(), 'resources', path)
+        browser.element('#uploadPicture').send_keys(file_path)
 
     def fill_current_address(self, value):
         browser.element('#currentAddress').type(value)
@@ -64,5 +65,20 @@ class StudentRegistrationPage:
         browser.element("footer").execute_script('element.remove()')
         browser.element('#submit').execute_script('element.click()')
 
-    def modal_after_submition(self):
-        return browser.all('tbody tr')
+    def should_have_user_info(self, full_name, email, gender, phone_number, date_of_birth, subject, hobby, picture,
+                              current_address, state_and_city):
+        browser.element('.table').all('td').even.should(
+            have.exact_texts(
+                full_name,
+                email,
+                gender,
+                phone_number,
+                date_of_birth,
+                subject,
+                hobby,
+                picture,
+                current_address,
+                state_and_city,
+            )
+        )
+        return self
