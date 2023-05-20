@@ -30,7 +30,7 @@ def test_fill_out_the_form():
     browser.all('.custom-checkbox').element_by(have.exact_text('Reading')).click()
 
     browser.element('#uploadPicture').type(
-        os.getcwd() + '/resources/1570735001190494352.jpg'
+        os.getcwd() + '/tests/resources/1570735001190494352.jpg'
     )
 
     browser.element('#currentAddress').type('Poland, Gdańsk, Wilcza 1')
