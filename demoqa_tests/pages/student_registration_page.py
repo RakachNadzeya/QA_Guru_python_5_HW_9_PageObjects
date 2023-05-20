@@ -39,7 +39,7 @@ class StudentRegistrationPage:
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
         
     def upload_picture(self, path):
-        file_path = os.path.join(os.getcwd(), 'resources', path)
+        file_path = os.path.join(os.getcwd(), 'tests', 'resources', path)
         browser.element('#uploadPicture').send_keys(file_path)
 
     def fill_current_address(self, value):
