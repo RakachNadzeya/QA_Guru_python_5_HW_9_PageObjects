@@ -1,6 +1,8 @@
 import os
 
 from selene import browser, by, have, be
+
+import tests
 from demoqa_tests.data.users import User
 
 
@@ -19,14 +21,13 @@ class StudentRegistrationPage:
         browser.element('.react-datepicker__year-select').type(student.birthday.year)
         browser.element('.react-datepicker__month-select').type(student.birthday.strftime('%B'))
         browser.element(f'.react-datepicker__day--0{student.birthday.day}').click()
-
         for subject in student.subjects:
             browser.element('#subjectsInput').type(subject).press_tab()
-
         for hobby in student.hobbies:
             browser.all('#hobbiesWrapper .custom-checkbox').element_by(have.exact_text(student.hobbies)).click()
 
-        browser.element('#uploadPicture').send_keys(os.getcwd() + f"/tests/resources/{student.picture}")
+        file_path = os.path.abspath(os.path.join(os.path.dirname(tests.__file__), f'resources/{student.picture}'))
+        browser.element('#uploadPicture').send_keys(file_path)
 
         browser.element('#currentAddress').type(student.address)
 
